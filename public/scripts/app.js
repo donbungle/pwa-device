@@ -24,7 +24,7 @@
     cardTemplate: document.querySelector('.cardTemplate'),
     container: document.querySelector('.main'),
     addDialog: document.querySelector('.dialog-container'),
-    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    daysOfWeek: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Do']
   };
 
 
@@ -110,12 +110,12 @@
       }
     }
     cardLastUpdatedElem.textContent = data.created;
-
+//(32 °F − 32) × 5/9 = 0
     card.querySelector('.description').textContent = current.text;
     card.querySelector('.date').textContent = current.date;
     card.querySelector('.current .icon').classList.add(app.getIconClass(current.code));
     card.querySelector('.current .temperature .value').textContent =
-      Math.round(current.temp);
+      Math.round((current.temp*1 - 32) * 5/9);
     card.querySelector('.current .sunrise').textContent = sunrise;
     card.querySelector('.current .sunset').textContent = sunset;
     card.querySelector('.current .humidity').textContent =
@@ -134,9 +134,9 @@
           app.daysOfWeek[(i + today) % 7];
         nextDay.querySelector('.icon').classList.add(app.getIconClass(daily.code));
         nextDay.querySelector('.temp-high .value').textContent =
-          Math.round(daily.high);
+          Math.round((daily.high*1 - 32) * 5/9);
         nextDay.querySelector('.temp-low .value').textContent =
-          Math.round(daily.low);
+          Math.round((daily.low*1 - 32) * 5/9);
       }
     }
     if (app.isLoading) {
@@ -267,6 +267,7 @@
    * or when the user has not saved any cities. See startup code for more
    * discussion.
    */
+   /*
   var initialWeatherForecast = {
     key: '2459115',
     label: 'New York, NY',
@@ -301,10 +302,10 @@
         direction: 195
       }
     }
-  };
+  };*/
   // TODO uncomment line below to test app with fake data
-  //app.updateForecastCard(initialWeatherForecast);
-
+ //app.updateForecastCard(initialWeatherForecast);
+ app.getForecast('349859', 'Santiago');
   // TODO add startup code here
 
   // TODO add service worker code here
